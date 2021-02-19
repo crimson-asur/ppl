@@ -1,13 +1,14 @@
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Jumbotron from "./Jumbotron";
 import Post from "./Post";
+
 const TimeLineLeft = (props) => {
   return (
     <>
       <Jumbotron />
-      <Post
-        props={props}
-        imgSrc="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/10/19/11/attack-on-titan.jpg"
-      />
+      <Post props={props} />
     </>
   );
 };

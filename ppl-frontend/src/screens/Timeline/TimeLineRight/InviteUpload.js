@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import UploadForm from "./UploadForm";
 
@@ -6,10 +6,12 @@ const InviteUpload = (props) => {
   console.log("Props function received");
 
   const [isUpload, setIsUpload] = useState(false);
+
   const renderForm = () => {
     props.props.props((prev) => !prev);
     setIsUpload((prevValue) => !prevValue);
   };
+
   return (
     <div>
       <div className="rght_btn">
