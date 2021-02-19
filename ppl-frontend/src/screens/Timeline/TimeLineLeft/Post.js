@@ -9,12 +9,12 @@ const Post = (props) => {
         user: localStorage.getItem("email"),
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setImages(result.data);
       });
   }, [props.props.props]);
-  console.log("Memory leak");
-  console.log(images);
+  // console.log("Memory leak");
+  // console.log(images);
   return (
     <div className="contnt_2">
       {images.map((image) => {

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import configData from "../../../config.json";
+
 const UploadForm = (props) => {
   const formData = new FormData();
   const [caption, setCaption] = useState("");
@@ -27,7 +29,7 @@ const UploadForm = (props) => {
     let email = localStorage.getItem("email");
     formData.append("email", email);
     axios
-      .post("http://localhost:3001/timeline/upload", formData)
+      .post(configData.IMAGE_UPLOAD, formData)
       .then((response) => {
         console.log(response);
         props.props((prev) => !prev);
@@ -67,39 +69,4 @@ const UploadForm = (props) => {
   );
 };
 
-const InviteUpload = (props) => {
-  console.log("Props function received");
-
-  const [isUpload, setIsUpload] = useState(false);
-  const renderForm = () => {
-    props.props.props((prev) => !prev);
-    setIsUpload((prevValue) => !prevValue);
-  };
-  return (
-    <div>
-      <div className="rght_btn">
-        <span className="rght_btn_icon">
-          <img src="images/btn_iconb.png" alt="up" />
-        </span>
-        <span className="btn_sep">
-          <img src="images/btn_sep.png" alt="sep" />
-        </span>
-        <a href="#" onClick={renderForm}>
-          Upload Post
-        </a>
-      </div>
-      {isUpload ? <UploadForm props={props.props.props} /> : ""}
-      <div className="rght_btn">
-        <span className="rght_btn_icon">
-          <img src="images/btn_icona.png" alt="up" />
-        </span>
-        <span className="btn_sep">
-          <img src="images/btn_sep.png" alt="sep" />
-        </span>
-        <a href="#">Invite Friends</a>{" "}
-      </div>
-    </div>
-  );
-};
-
-export default InviteUpload;
+export default UploadForm;
