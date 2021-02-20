@@ -9,6 +9,17 @@ const PostSchema = new Schema({
   caption: String,
   image: String,
   timestamp: Date,
+  likedBy: [String],
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  comments: [
+    {
+      username: String,
+      comment: String,
+    },
+  ],
 });
 
 module.exports = mongoose.model("uploads", PostSchema);

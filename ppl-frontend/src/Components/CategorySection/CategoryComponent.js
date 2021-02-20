@@ -1,8 +1,8 @@
 import React from "react";
 
 const CategoryComponent = (props) => {
-  console.log("Props at category component");
-  console.log(props);
+  // console.log("Props at category component");
+  // console.log(props);
   return (
     <li>
       <a href="#">

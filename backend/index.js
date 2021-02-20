@@ -2,8 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const morgan = require("morgan");
+
 const route = require("./routes/routes");
-const timeLine = require("./routes/timeline");
+const timeLine = require("./routes/timelineRoutes/timeline");
 
 require("dotenv").config();
 // File upload middleware
@@ -25,6 +27,8 @@ app.use(bodyParser.json());
 // Cross Origin Resource Sharing middleware
 // more @ https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 app.use(cors());
+
+app.use(morgan("tiny"));
 
 // DB connection
 mongoose

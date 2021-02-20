@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Featured from "../../Components/FeatureSection/Feature";
 import Categories from "../../Components/CategorySection/CategoryComponent";
 import Post from "../../Components/Post/";
 import Comment from "./Comment";
-
+import CreateComment from "./CreateComment";
 const data = [
   { name: "Cats", imgSrc: "/images/icon_01.png" },
   { name: "Dogs", imgSrc: "/images/icon_02.png" },
@@ -15,8 +15,10 @@ const data = [
 ];
 
 const PostPage = ({ match }) => {
-  console.log("Params");
-  console.log(match.params.id);
+  const [commentState, setCommentState] = useState(0);
+
+  // console.log("Params");
+  // console.log(match.params.id);
   return (
     <div className="container">
       <div className="content">
@@ -41,6 +43,7 @@ const PostPage = ({ match }) => {
         <div className="content_lft">
           <div className="contnt_2">
             <Post
+              commentState={setCommentState}
               props={{
                 image: match.params.id,
                 user: "mikasa@scouts.com",
@@ -55,6 +58,9 @@ const PostPage = ({ match }) => {
               <Comment />
               <Comment />
               <Comment />
+              <li>
+                <CreateComment commentState={commentState} />
+              </li>
             </ul>
           </div>
         </div>
