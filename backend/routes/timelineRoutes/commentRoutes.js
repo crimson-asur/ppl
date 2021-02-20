@@ -10,7 +10,7 @@ const createComment = async (req, res) => {
       },
       {
         $push: {
-          comments: { username: req.body.user, comment: req.body.comment },
+          comments: { username: req.body.username, comment: req.body.comment },
         },
       },
       { useFindAndModify: false }
@@ -22,7 +22,14 @@ const createComment = async (req, res) => {
   }
 };
 
-const fetchComments = (req, res) => {
-  res.end("Coming soon");
+// Function to get comments from db
+const fetchComments = async (req, res) => {
+  try {
+    const dbReadResult = await UploadModel.find({ image: req.body.image });
+    res.json({ comments: dbReadResult[0].comments });
+    console.log(dbReadResult);
+  } catch (error) {
+    console.log(error);
+  }
 };
 module.exports = { createComment, fetchComments };

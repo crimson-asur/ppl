@@ -6,6 +6,9 @@ import Categories from "../../Components/CategorySection/CategoryComponent";
 import Post from "../../Components/Post/";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
+
+import config from "../../config.json";
+
 const data = [
   { name: "Cats", imgSrc: "/images/icon_01.png" },
   { name: "Dogs", imgSrc: "/images/icon_02.png" },
@@ -16,9 +19,28 @@ const data = [
 
 const PostPage = ({ match }) => {
   const [commentState, setCommentState] = useState(0);
+  const [comments, setComments] = useState([]);
 
+  useEffect(() => {
+    fetchComments();
+  }, []);
+  const fetchComments = async () => {
+    const data = {
+      image: match.params.id,
+    };
+    try {
+      const response = await axios.post(config.IMAGE_GET_COMMENT, data);
+      console.log("comments are");
+
+      console.log(response.data.comments);
+      setComments(response.data.comments);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // console.log("Params");
   // console.log(match.params.id);
+  // fetchComments();
   return (
     <div className="container">
       <div className="content">
@@ -55,11 +77,14 @@ const PostPage = ({ match }) => {
 
           <div className="contnt_3">
             <ul>
-              <Comment />
-              <Comment />
-              <Comment />
+              {comments.map((item) => {
+                return <Comment item={item} />;
+              })}
               <li>
-                <CreateComment commentState={commentState} />
+                <CreateComment
+                  commentState={commentState}
+                  image={match.params.id}
+                />
               </li>
             </ul>
           </div>

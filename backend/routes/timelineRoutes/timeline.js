@@ -64,15 +64,7 @@ router.post("/showuploads", async (req, res) => {
 let like = 0;
 
 router.post("/getlikes", async (req, res) => {
-  try {
-    const image = await UploadModel.find({
-      image: req.body.image,
-    });
-    // console.log(image.likes);
-    res.json({ likes: image[0].likes });
-  } catch (error) {
-    console.log(error);
-  }
+  likeRoutes.fetchLikes(req, res);
 });
 
 router.post("/like", async (req, res) => {
@@ -80,7 +72,14 @@ router.post("/like", async (req, res) => {
   likeRoutes.likePhoto(req, res);
 });
 
+// @desc create new comment
 router.post("/comment", (req, res) => {
   commentRoutes.createComment(req, res);
 });
+
+// @desc fetch existing comments
+router.post("/fetchComments", (req, res) => {
+  commentRoutes.fetchComments(req, res);
+});
+
 module.exports = router;

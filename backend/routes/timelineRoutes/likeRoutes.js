@@ -1,5 +1,7 @@
 const UploadModel = require("../../models/Post");
 const temp = "";
+
+// Utility to like a photo
 const likePhoto = async (req, res) => {
   if (!req.body.like == true) {
     try {
@@ -32,4 +34,17 @@ const likePhoto = async (req, res) => {
   }
 };
 
-module.exports = { likePhoto, temp };
+// @desc Get likes of a photo
+const fetchLikes = async (req, res) => {
+  try {
+    const image = await UploadModel.find({
+      image: req.body.image,
+    });
+    // console.log(image.likes);
+    res.json({ likes: image[0].likes });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { likePhoto, fetchLikes, temp };
