@@ -8,6 +8,8 @@ const UserSchema = new Schema({
   username: String,
   email: String,
   password: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 
 module.exports = UserSchema;

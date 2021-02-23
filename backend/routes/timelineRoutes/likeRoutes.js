@@ -6,6 +6,8 @@ const likePhoto = async (req, res) => {
   if (!req.body.like == true) {
     try {
       const likesUpdater = await UploadModel.findOneAndUpdate(
+        // If user is not in likes array, inc counter and push user to likes  array
+        //
         { image: req.body.image, likedBy: { $nin: [req.body.user] } },
         { $inc: { likes: 1 }, $push: { likedBy: req.body.user } },
         { useFindAndModify: false }
@@ -21,6 +23,8 @@ const likePhoto = async (req, res) => {
   } else {
     try {
       const likesDecrement = await UploadModel.findOneAndUpdate(
+        // User has liked a photo, decrement likes and pop user from likes array
+        // Else do nothing
         { image: req.body.image, likedBy: { $in: [req.body.user] } },
         { $inc: { likes: -1 }, $pull: { likedBy: req.body.user } },
         { useFindAndModify: false }

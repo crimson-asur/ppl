@@ -6,6 +6,7 @@ const morgan = require("morgan");
 
 const route = require("./routes/routes");
 const timeLine = require("./routes/timelineRoutes/timeline");
+const mail = require("./routes/forgotPassword/");
 
 require("dotenv").config();
 // File upload middleware
@@ -48,6 +49,8 @@ app.use("/home", route); // routes/routes.js
 
 // Timeline routes
 app.use("/timeline", timeLine);
+
+app.use("/mail", mail);
 
 app.get("/oogabooga", (req, res) => {
   res.sendFile(

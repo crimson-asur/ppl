@@ -64,21 +64,26 @@ router.post("/showuploads", async (req, res) => {
 let like = 0;
 
 router.post("/getlikes", async (req, res) => {
+  // API to get likes of a post from DB
   likeRoutes.fetchLikes(req, res);
 });
 
 router.post("/like", async (req, res) => {
   // console.log(req.body);
+  // API to add a like to a post in DB
   likeRoutes.likePhoto(req, res);
 });
 
 // @desc create new comment
 router.post("/comment", (req, res) => {
+  // API to push a comment object {} in DB array "comments"
   commentRoutes.createComment(req, res);
 });
 
 // @desc fetch existing comments
+// @route POST /fetchComments
 router.post("/fetchComments", (req, res) => {
+  // API to get comments of a post from DB
   commentRoutes.fetchComments(req, res);
 });
 
