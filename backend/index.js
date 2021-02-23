@@ -9,6 +9,7 @@ const timeLine = require("./routes/timelineRoutes/timeline");
 const mail = require("./routes/forgotPassword/");
 
 require("dotenv").config();
+
 // File upload middleware
 // const multer = require("multer");
 

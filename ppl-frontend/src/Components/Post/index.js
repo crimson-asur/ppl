@@ -8,11 +8,13 @@ const IMAGE_LIKE = config.IMAGE_POST_LIKES;
 
 const Post = (props = { commentState: (prev) => {} }) => {
   // console.log(commentState);
+  // console.log("Props are");
+  // console.log(props);
   var commentState;
   if (!props.commentState) {
     commentState = () => {};
   } else commentState = props.commentState;
-  console.log(props);
+  // console.log(props);
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -106,7 +108,7 @@ const Post = (props = { commentState: (prev) => {} }) => {
                 <span className="btn_icon">
                   <img src="/images/icon_004.png" alt="share" />
                 </span>
-                4 Comments
+                {image.commentCount} Comments
               </Link>
             </li>
           </ul>

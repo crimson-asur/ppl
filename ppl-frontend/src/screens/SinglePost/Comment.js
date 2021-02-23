@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const Comment = (props) => {
+  console.log(props.commentState);
   return (
     <li>
       <div className="list_image">

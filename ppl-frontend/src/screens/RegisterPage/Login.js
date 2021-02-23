@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
+import config from "../../config.json";
+import history from "../History";
+
+const LOGIN_ENDPOINT = config.LOGIN;
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -12,22 +18,29 @@ const Login = (props) => {
   //   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    //  if email and password are not ""
     if (email && password) {
       // make backend call;
       console.log(email);
       console.log(password);
 
       try {
-        const response = await axios.post("http://localhost:3001/home/login", {
+        const response = await axios.post(LOGIN_ENDPOINT, {
           email,
           password,
         });
         console.log(response);
+
         setMessage(response.data);
-        localStorage.setItem("email", email);
+        //"You are logged in"
+        if (response.data === "You are logged in") {
+          localStorage.setItem("email", email);
+          history.push("/timeline");
+        }
       } catch (error) {
         console.error(error);
       }
+      // set email and password states back to ""
       setEmail("");
       setPassword("");
     }
@@ -39,6 +52,7 @@ const Login = (props) => {
         <li>
           <span>Email-ID</span>
           <input
+            required
             onChange={(e) => setEmail(e.target.value)}
             type="text"
             name="email"
@@ -50,6 +64,7 @@ const Login = (props) => {
           <input
             type="password"
             name="password"
+            required
             placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -66,15 +81,13 @@ const Login = (props) => {
             defaultValue="Log In"
             value="Log In"
           />
-          <a href>Forgot Password</a>
+          <Link to="/forgot">Forgot Password</Link>
         </li>
       </ul>
       <h3>{message}</h3>
       <div className="addtnal_acnt">
         I do not have any account yet.
-        <a onClick={props.toggleFn} href>
-          Create My Account Now !
-        </a>
+        <Link to="/">Create My Account Now !</Link>
       </div>
     </div>
   );

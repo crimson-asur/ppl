@@ -7,7 +7,8 @@ const CreateComment = (props) => {
   const searchInput = useRef(null);
   const [inputFieldState, setInputFieldState] = useState("");
 
-  console.log(props.commentState);
+  // State from parent Component received
+  // console.log(props);
 
   const handleChange = (event) => {
     setInputFieldState(() => event.target.value);
@@ -19,22 +20,25 @@ const CreateComment = (props) => {
     } else {
       console.log(props.image);
       const data = {
+        username: localStorage.getItem("email"),
         comment: inputFieldState,
         image: props.image,
-        username: localStorage.getItem("email"),
       };
       try {
         const response = await axios.post(config.IMAGE_POST_COMMENT, data);
         console.log(response);
+        props.changeCommentState((prev) => prev + 1);
+        // set input field state to ""
+        setInputFieldState(() => "");
       } catch (error) {
         console.log(error);
       }
     }
   };
 
-  useEffect(() => {
-    searchInput.current.focus();
-  }, [props.commentState]);
+  // useEffect(() => {
+  //   searchInput.current.focus();
+  // }, [props.commentState]);
   return (
     <div className="cmnt_div1">
       <input

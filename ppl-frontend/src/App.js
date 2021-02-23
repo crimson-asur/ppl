@@ -3,28 +3,27 @@ import Content from "./screens/RegisterPage/Content";
 import Footer from "./screens/components/Footer";
 import Timeline from "./TimeLine";
 import SinglePost from "./screens/SinglePost/PostPage";
+import Login from "./screens/RegisterPage/Login";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
+
+import history from "./screens/History/";
 
 function App() {
   return (
-    <Router>
-      <>
-        <NavBar />
+    <>
+      <NavBar />
+      <Router history={history}>
         <Switch>
-          <Route path="/home">
-            <Content />
-          </Route>
-
-          <Route exact path="/timeline">
-            <Timeline />
-          </Route>
-
+          {/* <Route path="/" component={Login} /> */}
+          <Route exact path="/timeline" component={Timeline} />
           <Route path="/timeline/:id" component={SinglePost} />
+          <Route path="/" component={Content} />
         </Switch>
-        <Footer />
-      </>
-    </Router>
+      </Router>
+
+      <Footer />
+    </>
   );
 }
 

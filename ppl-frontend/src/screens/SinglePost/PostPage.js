@@ -18,12 +18,18 @@ const data = [
 ];
 
 const PostPage = ({ match }) => {
+  // state to pass as prop to child components-CreateComment.js and Comment.js
+  // commentState  will be passed to CreateComponent.js which will change state when new comment is created
+  // change in state will rerender Comment component
   const [commentState, setCommentState] = useState(0);
   const [comments, setComments] = useState([]);
-
+  const [commentsCount, setCommentsCount] = useState(0);
+  console.log("PostPage rendered");
+  console.log(commentsCount);
   useEffect(() => {
     fetchComments();
-  }, []);
+  }, [commentState]);
+  // Function to retrieve comments from DB
   const fetchComments = async () => {
     const data = {
       image: match.params.id,
@@ -31,9 +37,11 @@ const PostPage = ({ match }) => {
     try {
       const response = await axios.post(config.IMAGE_GET_COMMENT, data);
       console.log("comments are");
-
+      let coms = response.data.comments;
       console.log(response.data.comments);
-      setComments(response.data.comments);
+
+      setCommentsCount(coms.length);
+      setComments(coms.reverse());
     } catch (error) {
       console.log(error);
     }
@@ -71,21 +79,24 @@ const PostPage = ({ match }) => {
                 user: "mikasa@scouts.com",
                 time: "2021-02-18T11:37:12.631Z",
                 caption: "ackerman",
+                commentCount: commentsCount,
               }}
             />
           </div>
 
           <div className="contnt_3">
             <ul>
-              {comments.map((item) => {
-                return <Comment item={item} />;
-              })}
               <li>
                 <CreateComment
+                  changeCommentState={setCommentState}
                   commentState={commentState}
                   image={match.params.id}
                 />
               </li>
+
+              {comments.map((item) => {
+                return <Comment commentState={commentState} item={item} />;
+              })}
             </ul>
           </div>
         </div>

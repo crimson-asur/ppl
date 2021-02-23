@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import config from "../../config.json";
+
+const SIGNUP_ENDPOINT = config.SIGNUP;
+
 const Register = (props) => {
   console.log(props.toggleFn);
   //   const [username, setUsername] = useState("");
@@ -17,6 +22,7 @@ const Register = (props) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
+    // Append form data to credentials
     event.preventDefault();
     if (
       !credentials.username ||
@@ -27,8 +33,9 @@ const Register = (props) => {
     ) {
       setMessage("All fields are required");
     } else {
+      // If data is valid make axios post call
       axios
-        .post("http://localhost:3001/home/signup", credentials)
+        .post(SIGNUP_ENDPOINT, credentials)
         .then((res) => {
           console.log(res);
           setMessage(res.data);
@@ -94,8 +101,8 @@ const Register = (props) => {
           />
         </li>
         <li>
-          <input type="checkbox" name="remember" />I agree to Term &amp;
-          Conditions
+          <input required type="checkbox" name="remember" />I agree to Term
+          &amp; Conditions
         </li>
         <li>
           <input
@@ -110,9 +117,7 @@ const Register = (props) => {
       <h4>{message}</h4>
       <div className="addtnal_acnt">
         I already have an account.
-        <a onClick={props.toggleFn} href>
-          Login My Account !
-        </a>
+        <Link to="/login">Login My Account !</Link>
       </div>
     </div>
   );

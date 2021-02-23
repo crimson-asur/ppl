@@ -1,7 +1,17 @@
 import React, { useState } from "react";
+// import {ReDirect} from "react-router-dom"
+
 import TimeLineLeft from "./TimeLineLeft/TimeLineLeft";
 import TimeLineRight from "./TimeLineRight/TimeLineRight";
+
+import history from "../History";
+
 const TimeLineCompiled = () => {
+  // if user is not found in local storage
+  // redirect user to login page
+  if (!localStorage.getItem("email")) {
+    history.push("/login");
+  }
   const [refresh, setRefresh] = useState(false);
   return (
     <div className="container">
