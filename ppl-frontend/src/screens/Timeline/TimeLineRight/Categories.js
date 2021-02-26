@@ -37,6 +37,7 @@ const Categories = () => {
       <div className="rght_list">
         <ul>
           {data.map((object) => {
+            // loop over data(array of {})
             return <CategoryComponent props={object} />;
           })}
         </ul>
