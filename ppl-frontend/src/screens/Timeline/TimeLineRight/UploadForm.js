@@ -13,6 +13,7 @@ const UploadForm = (props) => {
   useEffect(() => {
     console.log("useEffect called in inviteupload");
   }, [image]);
+
   // onChange event
   const handleChange = (event) => {
     setCaption(event.target.value);

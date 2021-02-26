@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import config from "../../config.json";
 import history from "../History";
+import store from "../../store";
 
 const LOGIN_ENDPOINT = config.LOGIN;
 
@@ -35,6 +36,7 @@ const Login = (props) => {
         //"You are logged in"
         if (response.data === "You are logged in") {
           localStorage.setItem("email", email);
+          store.dispatch({ type: "LOGIN" });
           history.push("/timeline");
         }
       } catch (error) {

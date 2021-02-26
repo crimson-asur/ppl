@@ -6,16 +6,10 @@ import Categories from "../../Components/CategorySection/CategoryComponent";
 import Post from "../../Components/Post/";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
+import InviteUpload from "../Timeline/TimeLineRight/InviteUpload";
 
 import config from "../../config.json";
-
-const data = [
-  { name: "Cats", imgSrc: "/images/icon_01.png" },
-  { name: "Dogs", imgSrc: "/images/icon_02.png" },
-  { name: "Birds", imgSrc: "/images/icon_03.png" },
-  { name: "Rabbits", imgSrc: "/images/icon_04.png" },
-  { name: "Other", imgSrc: "/images/icon_05.png" },
-];
+import history from "../History";
 
 const PostPage = ({ match }) => {
   // state to pass as prop to child components-CreateComment.js and Comment.js
@@ -26,6 +20,11 @@ const PostPage = ({ match }) => {
   const [commentsCount, setCommentsCount] = useState(0);
   console.log("PostPage rendered");
   console.log(commentsCount);
+
+  if (!localStorage.getItem("email")) {
+    history.push("/login");
+  }
+
   useEffect(() => {
     fetchComments();
   }, [commentState]);
@@ -53,6 +52,7 @@ const PostPage = ({ match }) => {
     <div className="container">
       <div className="content">
         <div className="content_rgt">
+          {/* <InviteUpload /> */}
           <div className="rght_list">
             <ul>
               {data.map((object) => {
@@ -111,4 +111,31 @@ let featuredData = [
   { name: "Rabbits", desc: "Lorem Ipsum", imageSrc: "/images/feat_img1" },
   { name: "Dogs", desc: "Lorem Ipsum", imageSrc: "/images/feat_img2" },
   { name: "Rabbits", desc: "Lorem Ipsum", imageSrc: "/images/feat_img3" },
+];
+const data = [
+  {
+    name: "Cats",
+    imgSrc: "/images/icon_01.png",
+    url: "https://kids.nationalgeographic.com/animals/birds/",
+  },
+  {
+    name: "Dogs",
+    imgSrc: "/images/icon_02.png",
+    url: "https://kids.nationalgeographic.com/animals/birds/",
+  },
+  {
+    name: "Birds",
+    imgSrc: "/images/icon_03.png",
+    url: "https://kids.nationalgeographic.com/animals/birds/",
+  },
+  {
+    name: "Rabbits",
+    imgSrc: "/images/icon_04.png",
+    url: "https://kids.nationalgeographic.com/animals/birds/",
+  },
+  {
+    name: "Other",
+    imgSrc: "/images/icon_05.png",
+    url: "https://kids.nationalgeographic.com/animals/birds/",
+  },
 ];

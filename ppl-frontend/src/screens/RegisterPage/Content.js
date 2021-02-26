@@ -9,6 +9,11 @@ import NewPassword from "./NewPassword";
 import history from "../History";
 
 const Content = () => {
+  // if user is logged in redirect to timeline page
+  if (localStorage.getItem("email")) {
+    history.push("/timeline");
+  }
+
   // const [register, setRegister] = useState(true);
   // const [user, setUser] = useState({});
 

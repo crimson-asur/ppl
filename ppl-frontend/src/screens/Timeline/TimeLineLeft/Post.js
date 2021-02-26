@@ -97,7 +97,8 @@ const Post = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { newUpload } = state;
-  return { newUpload: newUpload };
+  const { fileUploadReducer } = state;
+  console.log(fileUploadReducer);
+  return { newUpload: fileUploadReducer.newUpload };
 };
 export default connect(mapStateToProps)(Post);

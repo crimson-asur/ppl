@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Link, Router } from "react-router-dom";
+import { Link, BrowserRouter as Router } from "react-router-dom";
+
 import history from "../History";
+
+import Logout from "./Logout";
 
 const NavBar = () => {
   return (
@@ -107,18 +110,7 @@ const NavBar = () => {
                 <a href="#"> Resuse Market </a>
               </li>
               <li>
-                {localStorage.getItem("email") ? (
-                  <a
-                    onClick={() => {
-                      localStorage.removeItem("email");
-                      history.push("/");
-                    }}
-                  >
-                    Logout
-                  </a>
-                ) : (
-                  ""
-                )}
+                <Logout />
               </li>
             </ul>
           </div>
