@@ -5,7 +5,7 @@ const CategoryComponent = (props) => {
   // console.log(props);
   return (
     <li>
-      <a href="#">
+      <a href={props.props.url}>
         <span className="list_icon">
           <img src={props.props.imgSrc} alt="up" />
         </span>

@@ -35,6 +35,7 @@ const NewPassword = ({ match }) => {
         const response = await axios.post(RESET_PASSWORD, {
           password: password.password,
           email: email,
+          token: match.params.id,
         });
         if (response.data.msg === "OK") {
           alert("Your password has been reset");

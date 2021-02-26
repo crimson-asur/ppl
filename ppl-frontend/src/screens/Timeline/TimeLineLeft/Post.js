@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 
 import SinglePost from "../../../Components/Post/";
 const Post = (props) => {
+  // Single post compoponent looped
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -14,7 +16,8 @@ const Post = (props) => {
         // console.log(result);
         setImages(result.data);
       });
-  }, [props.props.props]);
+  }, [props.newUpload]);
+
   // console.log("Memory leak");
   // console.log(images);
   return (
@@ -92,4 +95,9 @@ const Post = (props) => {
   //   </div>
   // );
 };
-export default Post;
+
+const mapStateToProps = (state) => {
+  const { newUpload } = state;
+  return { newUpload: newUpload };
+};
+export default connect(mapStateToProps)(Post);

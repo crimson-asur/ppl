@@ -1,12 +1,33 @@
 import CategoryComponent from "../../../Components/CategorySection/CategoryComponent";
 
 const Categories = () => {
+  //  Hardcoded data, later fetch from backend
   const data = [
-    { name: "Cats", imgSrc: "images/icon_01.png" },
-    { name: "Dogs", imgSrc: "images/icon_02.png" },
-    { name: "Birds", imgSrc: "images/icon_03.png" },
-    { name: "Rabbits", imgSrc: "images/icon_04.png" },
-    { name: "Other", imgSrc: "images/icon_05.png" },
+    {
+      name: "Cats",
+      imgSrc: "images/icon_01.png",
+      url: "https://kids.nationalgeographic.com/animals/birds/",
+    },
+    {
+      name: "Dogs",
+      imgSrc: "images/icon_02.png",
+      url: "https://kids.nationalgeographic.com/animals/birds/",
+    },
+    {
+      name: "Birds",
+      imgSrc: "images/icon_03.png",
+      url: "https://kids.nationalgeographic.com/animals/birds/",
+    },
+    {
+      name: "Rabbits",
+      imgSrc: "images/icon_04.png",
+      url: "https://kids.nationalgeographic.com/animals/birds/",
+    },
+    {
+      name: "Other",
+      imgSrc: "images/icon_05.png",
+      url: "https://kids.nationalgeographic.com/animals/birds/",
+    },
   ];
   return (
     <div className="rght_cate">

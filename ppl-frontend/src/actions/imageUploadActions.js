@@ -1,0 +1,2 @@
+const NEW_IMAGE_UPLOAD = "NEW_IMAGE_UPLOAD";
+export default NEW_IMAGE_UPLOAD;

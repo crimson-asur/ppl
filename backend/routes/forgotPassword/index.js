@@ -97,9 +97,9 @@ router.post("/resetpwd", async (req, res) => {
     try {
       console.log(req.body);
       const response = await newUserModel.findOneAndUpdate(
-        { email: req.body.email }, // Find by email
+        { email: req.body.email, resetPasswordToken: req.body.token }, // Find by email
         { password: req.body.password, resetPasswordToken: "" }, // update password
-        { useFindAndModify: false } // mandatory optionn
+        { useFindAndModify: false } // mandatory option
       );
       if (response === null) {
         res.json({ msg: "BAD REQUEST" });

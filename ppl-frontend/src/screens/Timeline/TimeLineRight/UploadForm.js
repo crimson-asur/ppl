@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+
 import configData from "../../../config.json";
+import imageUploadAction from "../../../actions";
 
 const UploadForm = (props) => {
   const formData = new FormData();
@@ -20,6 +23,7 @@ const UploadForm = (props) => {
     setImage(event.target.files[0]);
     console.log(image);
   };
+
   // Onsubmit event
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,17 +32,23 @@ const UploadForm = (props) => {
     formData.append("pet", image);
     let email = localStorage.getItem("email");
     formData.append("email", email);
+
     axios
       .post(configData.IMAGE_UPLOAD, formData)
       .then((response) => {
         console.log(response);
-        props.props((prev) => !prev);
+
+        // change state in props
+        props.dispatch(imageUploadAction());
+        document.getElementById("img_upload").reset();
+        // props.props((prev) => !prev);
         // alert("upload succeessful");
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
   return (
     <div className="rght_cate">
       <form
@@ -46,6 +56,7 @@ const UploadForm = (props) => {
         onSubmit={handleSubmit}
         encType="multipart/form-data"
         method="POST"
+        id="img_upload"
       >
         <input type="file" onChange={handleFile} id="pet" required name="pet" />
 
@@ -60,13 +71,20 @@ const UploadForm = (props) => {
 
         <input
           type="submit"
-          style={{ margin: "2 3 px" }}
+          id="submt"
+          style={{ margin: "4px 3px ", color: "white" }}
           className="rght_btn"
           placeholder="Upload"
+          value="upload"
         />
       </form>
     </div>
   );
 };
 
-export default UploadForm;
+const mapStateToProps = (state) => {
+  const { newUpload } = state;
+  return { newUpload: newUpload };
+};
+
+export default connect(mapStateToProps)(UploadForm);
